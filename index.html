@@ -13,40 +13,74 @@
   <body>
 
 
-    <button onclick="open_upload()" class="upload_zone">
-      <img class="icon_img" src='icnon_img.png'></img>
-      <img class="icon_upload" src='upload_icon.png'></img>
-      <p class="click_text">Click to Upload !</p>
-    </button>
+    <section class="infos">
+      <div class="infos_wrapper">
+        <div class="text_wrapper">
+          <h1 class="title">Floutter les visages d'une image</h1>
+          
+          <p class="colored">100 % automatique et gratuit </p>
+          <p>Utiliser l'IA pour anonymiser tous les visages de vos photo auomatiquement</p>
+          <button class='go_button'  onClick="document.getElementsByClassName('app')[0].scrollIntoView();">
+            GO !
+          </button>
 
-    <div class="loading">
-      <div class="waiting">
+        </div>
 
-      <div class="spinner"></div>
-      <p> Blurring ...</p>
-    </div>
-    <div class="end">
+        <img class='arrow' src="src/arrow.png" ></img>
 
-      <div class="emote"></div>
-      <p id="text_result"> Succes ...</p>
-    </div>
+        <div class="demo">
+          <img class='demo_img' src="src/demo_1.png" ></img>
+          <img class='demo_img demo_first'  src="src/demo_2.jpg" ></img>
+
+        </div>
+
+      </div>
 
 
-    </div>
+    </section>
 
-    <input type="file" id="fileUpload" />
-    <div class='selection'></div>
+    <section class="app">
+      <div class="app_wrapper">
+        <p class='app_title'>Téléchargez une image pour l'anonymiser</p>
+        <button onclick="open_upload()" class="upload_zone">
+          <img class="icon_img" src='src/icon_img.png'></img>
+          <p class="click_text">Click to Upload !</p>
+        </button>
 
-    <div id="uploadedImage"></div>
+        <div class="loading">
+          <div class="waiting">
 
-    <canvas id='canvas_result' width="236">
-      Désolé, votre navigateur ne prend pas en charge &lt;canvas&gt;.
-    </canvas>
+          <div class="spinner"></div>
+          <p> Blurring ...</p>
+        </div>
+        <div class="end" >
 
+          <div class="emote">🎉</div>
+          <p id="text_result"> Succes ...</p>
+          <button onclick="download()" class="download"> Telecharger</button>
+        </div>
+
+
+        </div>
+
+        <input type="file" id="fileUpload" />
+
+        <div id="uploadedImage"></div>
+        <canvas id='canvas_result' width="236">
+          Désolé, votre navigateur ne prend pas en charge &lt;canvas&gt;.
+        </canvas>
+      </div>
+      </section>
+  <div class='selection'></div>
+
+
+   
 
     <canvas id='canvas_real'>
       Désolé, votre navigateur ne prend pas en charge &lt;canvas&gt;.
     </canvas>
-    
+    <div class="bottom_wrapper">
+     <a  target="_blank" class="link_me" href="https://bptst.github.io/esper/"> bptst </a>
+    </div>
   </body>
 </html>

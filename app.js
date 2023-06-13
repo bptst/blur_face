@@ -28,6 +28,12 @@ function open_upload(){
 var loading=document.getElementsByClassName('loading')[0]
 function star_loading(){
   loading.style.visibility='visible'
+
+  loading.getElementsByClassName('waiting')[0].style.visibility='visible'
+  loading.getElementsByClassName('end')[0].style.visibility='hidden'
+
+
+
 }
 
 function loading_update(nb_face){
@@ -35,11 +41,21 @@ function loading_update(nb_face){
   loading.getElementsByClassName('end')[0].style.visibility='visible'
 
   if (nb_face==0){
-    document.getElementById('text_result').innerText='Erreur, No face found'
+    document.getElementById('text_result').style.color='red'
+    document.getElementById('text_result').innerText='Mince, Aucun visage trouvé'
+    document.getElementsByClassName('emote')[0].innerText='🚫'
+    document.getElementsByClassName('download')[0].style.display='none'
+
 
   }
   else{
-    document.getElementById('text_result').innerText='Succes !, '+nb_face+' face found'
+    document.getElementById('text_result').style.color='green'
+    document.getElementById('text_result').innerText=nb_face+' visage trouvés !'
+    document.getElementsByClassName('emote')[0].innerText='🎉'
+    document.getElementsByClassName('download')[0].style.display='block'
+
+
+   
 
   }
 }
@@ -138,7 +154,6 @@ function processImage({ image, imageDimensions }) {
       });
       console.log('counter fafa '+counter_face)
       loading_update(counter_face)
-      download()
     });
 }
 
@@ -225,19 +240,19 @@ function draw(canvs_todraw,img,blurredRect) {
   let h= blurredRect['height']
 
   let pixelArr = ctx.getImageData(blurredRect['x'], blurredRect['y'], blurredRect['width'], blurredRect['height']).data;
-  let sample_size_width =w/5
-  let sample_size_height =h/7
+  let sample_size_width =w/7
+  let sample_size_height =h/10
 
   for (let y = 0; y < h; y += sample_size_height) {
     for (let x = 0; x < w; x += sample_size_width) {
-      let p = (x + (y*w)) * 4;
+      let p = 8+(x + (y*w)) * 4;
      // console.log(pixelArr.length)
-      p= getRandomInt(pixelArr.length/8)+pixelArr.length/2
+      //p= getRandomInt(pixelArr.length/8)+pixelArr.length/2
 
-      p=p-p %4
+      p=p-p%4
   
       //console.log(pixelArr[p])
-      ctx.fillStyle = "rgba(" + pixelArr[p] + "," + pixelArr[p + 1] + "," + pixelArr[p + 2] + "," + pixelArr[p + 3]/(2/3) + ")";
+      ctx.fillStyle = "rgba(" + pixelArr[p] + "," + pixelArr[p + 1] + "," + pixelArr[p + 2] + "," + pixelArr[p + 3] + ")";
       ctx.fillRect(x+ blurredRect['x'], y+ blurredRect['y'], sample_size_width+1, sample_size_height+1);
     }
   }
@@ -249,7 +264,7 @@ function draw(canvs_todraw,img,blurredRect) {
 
 
 
-var download = function(){
+function download(){
   var link = document.createElement('a');
   link.download = 'filename.png';
   link.href = document.getElementById('canvas_real').toDataURL()
@@ -260,91 +275,5 @@ var download = function(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Puer
-
-var is_selecting=false
-var target=[0,0]
-const selection=document.getElementsByClassName('selection')[0]
-document.addEventListener('mousemove', e => {
-  if (is_selecting){
-  draw_selecion(e)
-  }
-})
-
-document.addEventListener('mousedown', e => {
-
-  const mousse_x=e.clientX
-  const mousse_y=e.clientY
-  is_selecting=true
-
-  target=[mousse_x,mousse_y]
-})
-
-
-function draw_selecion(e){
-  const mousse_x=e.clientX
-  const mousse_y=e.clientY
-
-
-  
-
-    var width_selection=mousse_x-target[0]
-    var height_selection=mousse_y-target[1]
-
-    var left_move=0
-    var top_move=0
-
-
-    if (width_selection<0){
-      width_selection=-width_selection
-      left_move=width_selection-1
-    }
-    if (height_selection<0){
-      height_selection=-height_selection
-      top_move=height_selection
-    }
-
-    selection.style.width=width_selection-5+'px'
-    selection.style.opacity=1
-    selection.style.left=target[0]-left_move+'px'
-    selection.style.top=target[1]-top_move+'px'
-    selection.style.height=height_selection-5+'px'
-
-}
-
-document.addEventListener('mouseup', event => {
-
-is_selecting=false
-selection.style.width='0px'
-selection.style.opacity=0
-selection.style.height='0px'
-})
 
 
