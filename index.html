@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Face detection</title>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+    <link href="style.css" rel="stylesheet"></link>
+    <script src="dist/face-api.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+
+  <body>
+
+
+    <button onclick="open_upload()" class="upload_zone">
+      <img class="icon_img" src='icnon_img.png'></img>
+      <img class="icon_upload" src='upload_icon.png'></img>
+      <p class="click_text">Click to Upload !</p>
+    </button>
+
+    <div class="loading">
+      <div class="waiting">
+
+      <div class="spinner"></div>
+      <p> Blurring ...</p>
+    </div>
+    <div class="end">
+
+      <div class="emote"></div>
+      <p id="text_result"> Succes ...</p>
+    </div>
+
+
+    </div>
+
+    <input type="file" id="fileUpload" />
+    <div class='selection'></div>
+
+    <div id="uploadedImage"></div>
+
+    <canvas id='canvas_result' width="236">
+      Désolé, votre navigateur ne prend pas en charge &lt;canvas&gt;.
+    </canvas>
+
+
+    <canvas id='canvas_real'>
+      Désolé, votre navigateur ne prend pas en charge &lt;canvas&gt;.
+    </canvas>
+    
+  </body>
+</html>
